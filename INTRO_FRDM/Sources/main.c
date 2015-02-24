@@ -60,7 +60,7 @@ int main(void)
 	  LED_WAIT_Waitms(1000);
 	  LED_BLUE_NegVal();
 	  LED_RED_NegVal();
-	  LED_GREEN_NegVal();
+	  //LED_GREEN_NegVal();
   }
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
