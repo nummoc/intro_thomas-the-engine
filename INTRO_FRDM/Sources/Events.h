@@ -34,6 +34,13 @@
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
+#include "LED_RED.h"
+#include "BitIoLdd1.h"
+#include "LED_GREEN.h"
+#include "BitIoLdd2.h"
+#include "LED_BLUE.h"
+#include "BitIoLdd3.h"
+#include "LED_WAIT.h"
 
 #ifdef __cplusplus
 extern "C" {
