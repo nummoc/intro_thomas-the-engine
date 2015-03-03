@@ -8,18 +8,19 @@
 #ifndef LED_ROBO_H_
 #define LED_ROBO_H_
 
+// LEDs are low active
+typedef enum {
+	LED_ON = 0,
+	LED_OFF = 1
+} LED_Status;
+
 typedef enum
 {
-	NONE = (1<<0),
-	OFF = NONE,
-	RED = (1<<1),
-	GREEN = (1<<2),
-	BLUE = (1<<3),
-	CYAN = GREEN | BLUE,
-	MAGENTA = RED | BLUE,
-	YELLOW = RED | GREEN,
-	WHITE = RED | GREEN | BLUE,
-	ALL = WHITE
+	LED_NONE = 0,
+	LED_FRONT_LEFT = (1<<1),
+	LED_FRONT_RIGHT = (1<<2),
+	LED_FRONT = LED_FRONT_LEFT | LED_FRONT_RIGHT,
+	LED_ALL = LED_FRONT
 } LED_Set;
 
 

@@ -5,6 +5,7 @@
  *      Author: Philipp Gosswiler
  */
 #include "Platform.h"
+#include "LED.h"
 
 void PL_Init(void) {
 	#if LED_ENABLE

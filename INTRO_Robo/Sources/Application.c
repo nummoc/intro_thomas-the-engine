@@ -17,10 +17,10 @@ void APP_Start(void) {
 	// Do work
 	LED_Test();
 
-	LED_On(LED_BLUE);
+	LED_On(LED_FRONT_LEFT);
 	for(;;) {
 		LED_WAIT_Waitms(500);
-		LED_Neg(LED_MAGENTA);
+		LED_Neg(LED_FRONT);
 	}
 
 	// Finalize Platform

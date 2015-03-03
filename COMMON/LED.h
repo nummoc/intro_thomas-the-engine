@@ -1,8 +1,9 @@
-/*
- * LED.h
+/**
+ *  \file LED.h
+ *  \brief LED Driver
+ *  \author Philipp Gosswiler <philipp.gosswiler@stud.hslu.ch>
  *
- *  Created on: 02.03.2015
- *      Author: Philipp Gosswiler
+ *  Interface for LED Driver. Defines basic functions to use LEDs in the project.
  */
 
 #ifndef LED_H_
