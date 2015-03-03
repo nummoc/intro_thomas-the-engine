@@ -1,8 +1,10 @@
-/*
- * Platform.h
+/**
+ * \file
+ * \brief Platform initialization
+ * \author Philipp Gosswiler <philipp.gosswiler@stud.hslu.ch>
+ * \author Reto Ritter <reto.ritter@stud.hslu.ch>
  *
- *  Created on: 02.03.2015
- *      Author: Philipp Gosswiler
+ * Provides means to initialize and finalize the platform.
  */
 
 #ifndef PLATFORM_H_
@@ -12,7 +14,14 @@
 #define LED_TEST (LED_ENABLE & 1)
 
 // Initialization
+/*!
+ * Initializes the platform.
+ */
 void PL_Init(void);
+
+/*!
+ * Finalizes the platform.
+ */
 void PL_Deinit(void);
 
 
