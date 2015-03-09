@@ -1,7 +1,8 @@
-/**
+/*!
  *  \file LED.h
  *  \brief LED Driver
  *  \author Philipp Gosswiler <philipp.gosswiler@stud.hslu.ch>
+ *  \author Reto Ritter <reto.ritter@stud.hslu.ch>
  *
  *  Interface for LED Driver. Defines basic functions to use LEDs in the project.
  */

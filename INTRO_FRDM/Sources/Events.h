@@ -41,6 +41,8 @@
 #include "LED_BLUE.h"
 #include "BitIoLdd3.h"
 #include "LED_WAIT.h"
+#include "CS1.h"
+#include "HF1.h"
 
 #ifdef __cplusplus
 extern "C" {

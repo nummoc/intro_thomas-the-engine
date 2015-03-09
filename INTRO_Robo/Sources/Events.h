@@ -39,6 +39,8 @@
 #include "LED_FRONT_LEFT.h"
 #include "BitIoLdd2.h"
 #include "LED_WAIT.h"
+#include "CS1.h"
+#include "HF1.h"
 
 #ifdef __cplusplus
 extern "C" {
