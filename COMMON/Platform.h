@@ -10,9 +10,10 @@
 #ifndef PLATFORM_H_
 #define PLATFORM_H_
 
-#define LED_ENABLE (1)
-#define LED_TEST (LED_ENABLE & 1)
+#define LED_ENABLED (1)
+#define LED_TEST (LED_ENABLED & 1)
 #define EVENT_ENABLED (1)
+#define TIMER_ENABLED (1)
 
 // Initialization
 /*!

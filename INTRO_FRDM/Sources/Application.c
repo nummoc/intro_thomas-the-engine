@@ -16,12 +16,8 @@ void APP_Start(void) {
 	PL_Init();
 
 	// Do work
+	LED_On(LED_BLUE);
 	for(;;) {
-		LED_WAIT_Waitms(500);
-		EVNT_SetEvent(EVNT_LED_ON);
-		EVNT_HandleEvent(APP_HandleEvent);
-		LED_WAIT_Waitms(500);
-		EVNT_SetEvent(EVNT_LED_OFF);
 		EVNT_HandleEvent(APP_HandleEvent);
 	}
 
@@ -38,6 +34,9 @@ void APP_HandleEvent(EVNT_Handle event) {
 			break;
 		case EVNT_LED_OFF:
 			LED_All_Off();
+			break;
+		case EVNT_LED_NEG:
+			LED_Neg(LED_ALL);
 			break;
 		default: /* do nothing */
 			break;

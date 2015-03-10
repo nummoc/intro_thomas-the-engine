@@ -9,7 +9,7 @@
 #include "Event.h"
 
 void PL_Init(void) {
-	#if LED_ENABLE
+	#if LED_ENABLED
 	LED_Init();
 	#endif
 	#if EVENT_ENABLED
@@ -18,7 +18,7 @@ void PL_Init(void) {
 }
 
 void PL_Deinit(void) {
-	#if LED_ENABLE
+	#if LED_ENABLED
 	LED_Deinit();
 	#endif
 	#if EVENT_ENABLED

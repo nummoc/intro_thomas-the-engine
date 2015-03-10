@@ -11,7 +11,7 @@
 #define LED_H_
 
 #include "Platform.h"
-#if LED_ENABLE
+#if LED_ENABLED
 
 #ifdef PL_BOARD_IS_FRDM
 	#include "LED_FRDM.h"
