@@ -10,9 +10,13 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
+#include "Event.h"
+
 /*!
  * Entry point to the application.
  */
 void APP_Start(void);
+
+void APP_HandleEvent(EVNT_Handle event);
 
 #endif /* APPLICATION_H_ */
