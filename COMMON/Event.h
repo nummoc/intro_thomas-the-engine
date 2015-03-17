@@ -1,25 +1,30 @@
-/*!
+/**
  * \file
- * \brief	
- * \author	Philipp Gosswiler <philipp.gosswiler@stud.hslu.ch>
- * \author	Reto Ritter <reto.ritter@stud.hslu.ch>
+ * \brief Event driver interface.
+ * \author Erich Styger, erich.styger@hslu.ch
  *
- *
+ * This module implements a generic event driver. We are using numbered events starting with zero.
+ * EVNT_HandleEvent() can be used to process the pending events. Note that the event with the number zero
+ * has the highest priority and will be handled first
  */
 
 #ifndef EVENT_H_
 #define EVENT_H_
 
 #include "Platform.h"
-#include "PE_Types.h"
 
-#if EVENT_ENABLED
+#if PL_HAS_EVENTS
 
 typedef enum EVNT_Handle {
-  EVNT_INIT,            /*!< System Initialization Event */
-  EVNT_LED_ON,			/*!< LEDs on Event */
-  EVNT_LED_OFF,			/*!< LEDs off Event */
-  EVNT_LED_NEG,			/*!< LEDs negate Event */
+  EVNT_STARTUP,			/*!< System startup Event */
+  EVNT_LED_HEARTBEAT,	/*!< LED heartbeat */
+  EVNT_SW1_PRESSED,		/*!< Button 1 pressed */
+  EVNT_SW2_PRESSED,		/*!< Button 2 pressed */
+  EVNT_SW3_PRESSED,		/*!< Button 3 pressed */
+  EVNT_SW4_PRESSED,		/*!< Button 4 pressed */
+  EVNT_SW5_PRESSED,		/*!< Button 5 pressed */
+  EVNT_SW6_PRESSED,		/*!< Button 6 pressed */
+  EVNT_SW7_PRESSED,		/*!< Button 7 pressed */
   EVNT_NOF_EVENTS       /*!< Must be last one! */
 } EVNT_Handle;
 
@@ -62,5 +67,6 @@ void EVNT_Init(void);
 void EVNT_Deinit(void);
 
 #endif /* PL_HAS_EVENTS */
+
 
 #endif /* EVENT_H_ */

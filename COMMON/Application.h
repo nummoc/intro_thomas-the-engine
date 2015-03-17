@@ -1,22 +1,18 @@
 /**
  * \file
- * \brief Application entry point
- * \author Philipp Gosswiler <philipp.gosswiler@stud.hslu.ch>
- * \author Reto Ritter <reto.ritter@stud.hslu.ch>
+ * \brief Interface to application logic.
+ * \author Erich Styger, erich.styger@hslu.ch
  *
- * Entry point to the application. All of the non generated code should be placed within Application.c. Avoid adding individual code to main.c.
+ * In this module the application logic is implemented.
  */
 
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
-#include "Event.h"
-
 /*!
- * Entry point to the application.
+ * \brief Runs the application main loop.
  */
-void APP_Start(void);
+void APP_Run(void);
 
-void APP_HandleEvent(EVNT_Handle event);
 
 #endif /* APPLICATION_H_ */
