@@ -19,6 +19,7 @@
 /*! \brief Triggers which can be used from the application */
 typedef enum {
 	TRG_BUZ_BEEP,		/*!< Buzzer trigger */
+	TRG_KEYPRESS,
 	TRG_NOF_TRIGGERS	/*!< Must be last! */
 } TRG_TriggerKind;
 

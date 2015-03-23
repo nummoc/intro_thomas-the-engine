@@ -54,6 +54,8 @@
   /*!< Set to 1 to enable buzzer support, 0 otherwise */
 #define PL_HAS_SHELL		(1)
   /*!< Set to 1 to enable shell support, 0 otherwise */
+#define PL_HAS_DEBOUNCE		(1)
+  /*!< Set to 1 to enable debouncing support, 0 otherwise */
 
 /* if keys are using interrupts or are polled */
 #if PL_IS_FRDM

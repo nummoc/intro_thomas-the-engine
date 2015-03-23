@@ -51,6 +51,9 @@ static void APP_HandleEvents(EVNT_Handle event) {
     case EVNT_SW7_PRESSED:
     	CLS1_SendStr("EVNT_SW7_PRESSED\r\n", CLS1_GetStdio()->stdOut);
     	break;
+    case EVNT_SW7_RELEASED:
+    	CLS1_SendStr("EVNT_SW7_RELEASED\r\n", CLS1_GetStdio()->stdOut);
+    	break;
     default:
       break;
   }
