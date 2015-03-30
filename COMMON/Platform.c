@@ -18,6 +18,7 @@
 #include "Trigger.h"
 #include "Buzzer.h"
 #include "Keys.h"
+#include "RTOS.h"
 
 void PL_Init(void) {
 #if PL_HAS_LED
@@ -37,6 +38,9 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_KEYS
   KEY_Init();
+#endif
+#if PL_HAS_RTOS
+  RTOS_Init();
 #endif
 }
 
@@ -58,5 +62,8 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_KEYS
   KEY_Deinit();
+#endif
+#if PL_HAS_RTOS
+  RTOS_Deinit();
 #endif
 }
