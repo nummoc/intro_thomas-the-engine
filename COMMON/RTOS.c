@@ -14,21 +14,10 @@
 static portTASK_FUNCTION(T1, pvParameters) {
   for(;;) {
     LED2_Neg();
-    CLS1_SendStr("Idle Task\r\n", CLS1_GetStdio()->stdOut);
+    //CLS1_SendStr("Idle Task\r\n", CLS1_GetStdio()->stdOut);
     FRTOS1_vTaskDelay(1000/portTICK_RATE_MS);
   }
 }
-
-/*static void IdleTask(void *pvParameters) {
-	for (;;) {
-		vTask
-		if (!configUSE_PREEMPTION) {
-			taskYIELD();
-		} else if (configIDLE_SHOULD_YIELD) {
-			if ()
-		}
-	}
-}*/
 
 void RTOS_Run(void) {
   FRTOS1_vTaskStartScheduler();
@@ -37,9 +26,9 @@ void RTOS_Run(void) {
 
 void RTOS_Init(void) {
   /*! \todo Add tasks here */
-  if (FRTOS1_xTaskCreate(T1, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
-    for(;;){} /* error */
-  }
+  //if (FRTOS1_xTaskCreate(T1, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+  //  for(;;){} /* error */
+  //}
 }
 
 void RTOS_Deinit(void) {

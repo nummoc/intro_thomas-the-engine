@@ -32,7 +32,11 @@ void EVNT_SetEvent(EVNT_Handle event) {
 }
 
 void EVNT_ClearEvent(EVNT_Handle event) {
-  CLR_EVENT(event);
+   CS1_CriticalVariable()
+
+   CS1_EnterCritical();
+   CLR_EVENT(event);
+   CS1_ExitCritical();
 }
 
 bool EVNT_EventIsSet(EVNT_Handle event) {

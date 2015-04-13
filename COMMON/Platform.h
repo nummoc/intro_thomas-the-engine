@@ -40,7 +40,7 @@
   /*!< Set to 1 to enable keys, 0 otherwise */
 #define PL_HAS_KBI			(1)
   /*!< Set to 1 to enable key interrupt support, 0 otherwise */
-#define PL_HAS_KBI_NMI		(1 && PL_IS_FRDM && PL_HAS_JOYSTICK)
+#define PL_HAS_KBI_NMI		(0 && PL_IS_FRDM && PL_HAS_JOYSTICK)
   /*!< Set to 1 for special case on NMI/PTA pin on FRDM board, 0 otherwise */
 #define PL_HAS_MEALY 		(1 && PL_NOF_LEDS>=1 && PL_NOF_KEYS>=1)
   /*!< Set to 1 to enable Mealy sequential state machine, 0 otherwise */
@@ -58,12 +58,28 @@
   /*!< Set to 1 to enable debouncing support, 0 otherwise */
 #define PL_HAS_RTOS			(1)
   /*!< Set to 1 to enable RTOS support, 0 otherwise */
+#define PL_HAS_SHELL_QUEUE	(1)
+  /*!< Set to 1 to enable Shell Queue support, 0 otherwise */
+#define PL_HAS_SEMAPHORE	(1)
+  /*!< Set to 1 to enable semaphore support, 0 otherwise */
+
+#if PL_IS_FRDM
+#define PL_HAS_BLUETOOTH	(0)
+  /*!< Set to 1 to enable bluetooth support, 0 otherwise */
+#define PL_HAS_USB_CDC		(0)
+  /*!< Set to 1 to enable USB CDC support, 0 otherwise */
+#elif PL_IS_ROBO
+#define PL_HAS_BLUETOOTH	(1)
+  /*!< Set to 1 to enable bluetooth support, 0 otherwise */
+#define PL_HAS_USB_CDC		(1)
+  /*!< Set to 1 to enable USB CDC support, 0 otherwise */
+#endif
 
 /* if keys are using interrupts or are polled */
 #if PL_IS_FRDM
   #define PL_KEY_POLLED_KEY1    (0)
   #define PL_KEY_POLLED_KEY2    (0)
-  #define PL_KEY_POLLED_KEY3    (0)
+  #define PL_KEY_POLLED_KEY3    (1)
   #define PL_KEY_POLLED_KEY4    (0)
   #define PL_KEY_POLLED_KEY5    (1)
   #define PL_KEY_POLLED_KEY6    (1)

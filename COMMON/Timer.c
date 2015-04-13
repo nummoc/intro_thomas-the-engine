@@ -21,16 +21,14 @@
 
 void TMR_OnInterrupt(void) {
   /* this one gets called from an interrupt!!!! */
-  static int cntr=0;
 
-  cntr++;
-  if (cntr==(1000/TMR_TICK_MS)) {
-	  //EVNT_SetEvent(EVNT_LED_HEARTBEAT);
+
+
 #if PL_HAS_TRIGGER
 	  TRG_IncTick();
 #endif
-    cntr = 0;
-  }
+
+
 }
 
 void TMR_Init(void) {

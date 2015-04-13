@@ -23,14 +23,14 @@
 static void APP_HandleEvents(EVNT_Handle event) {
   switch(event) {
     case EVNT_STARTUP:
-    	CLS1_SendStr("EVNT_STARTUP\r\n", CLS1_GetStdio()->stdOut);
     	LED1_On();
     	WAIT1_Waitms(50);
     	LED1_Off();
     	break;
     case EVNT_LED_HEARTBEAT:
-    	CLS1_SendStr("EVNT_LED_HEARTBEAT\r\n", CLS1_GetStdio()->stdOut);
     	LED1_Neg();
+    	LED2_Neg();
+    	LED3_Neg();
     	break;
     case EVNT_SW1_PRESSED:
     	CLS1_SendStr("EVNT_SW1_PRESSED\r\n", CLS1_GetStdio()->stdOut);
@@ -114,6 +114,18 @@ static void MainTask(void *pvParameters) {
 }
 
 /*!
+ * HeartBleed function.
+ * @param pvParameters
+ */
+static void HeartBleed(void *pvParameters) {
+	(void) pvParameters;
+	for(;;) {
+		EVNT_SetEvent(EVNT_LED_HEARTBEAT);
+		FRTOS1_vTaskDelay(1000/portTICK_RATE_MS);
+	}
+}
+
+/*!
  * \brief Application main 'task'.
  */
 static void APP_Task(void) {
@@ -123,6 +135,9 @@ static void APP_Task(void) {
   if (FRTOS1_xTaskCreate(MainTask, "Main", configMINIMAL_STACK_SIZE+100, (void*)NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
     for(;;){} /* error */
   }
+  //if (FRTOS1_xTaskCreate(HeartBleed, "HeartBleed", configMINIMAL_STACK_SIZE+100, (void*)NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+  //  for(;;){} /* error */
+  //}
 
   RTOS_Run();
 }

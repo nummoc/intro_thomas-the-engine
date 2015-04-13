@@ -36,6 +36,7 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "../../COMMON/Platform.h"
 #include "../../COMMON/Keys.h"
 #include "../../COMMON/Timer.h"
 
@@ -134,6 +135,7 @@ void SW4_OnInterrupt(void)
 */
 void SW3_OnInterrupt(void)
 {
+#if !PL_KEY_POLLED_KEY3
 	#if PL_HAS_KBI
 	#if 1 /* Problem with Processor Expert and sharing PTA4/NMI interrupt: code below is missing in ExtIntLdd3_OnInterrupt() */
 		/* Check the pin interrupt flag of the shared interrupt */
@@ -149,6 +151,7 @@ void SW3_OnInterrupt(void)
 	  }
 	#endif
 	#endif
+#endif
 }
 
 /*
@@ -237,7 +240,9 @@ void FRTOS1_vApplicationTickHook(void)
 {
   /* Called for every RTOS tick. */
   /* Write your code here ... */
-	TI1_OnInterrupt();
+#if PL_HAS_TIMER
+	TMR_OnInterrupt();
+#endif
 }
 
 /*
