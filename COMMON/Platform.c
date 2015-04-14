@@ -1,90 +1,94 @@
-/**
- * \file
- * \brief Platform implementation module.
- * \author Erich Styger, erich.styger@hslu.ch
+/*
+ * Platform.c
  *
- * This implements the platform module.
- * Here the platform gets initialized, and all platform dependent macros get defined.
+ *  Created on: 02.03.2015
+ *      Author: tastyger
  */
-/*!
-**  @addtogroup PLATFORM_module Platform module documentation
-**  @{
-*/
 
 #include "Platform.h"
 #include "LED.h"
+#include "Mealy.h"
+#include "Keys.h"
 #include "Event.h"
-#include "Timer.h"
 #include "Trigger.h"
 #include "Buzzer.h"
-#include "Keys.h"
 #include "RTOS.h"
 #include "Shell.h"
 #include "ShellQueue.h"
-#include "Sem.h"
+#include "Reflectance.h"
 
 void PL_Init(void) {
+#if PL_HAS_MEALY
+	MEALY_Init();
+#endif
 #if PL_HAS_LED
-  LED_Init();
+	LED_Init();
 #endif
+
 #if PL_HAS_EVENTS
-  EVNT_Init();
+	EVNT_Init();
 #endif
-#if PL_HAS_TIMER
-  TMR_Init();
+
+#if PL_HAS_KEYS
+	KEY_Init();
 #endif
+
 #if PL_HAS_TRIGGER
-  TRG_Init();
+	TRG_Init();
 #endif
 #if PL_HAS_BUZZER
-  BUZ_Init();
-#endif
-#if PL_HAS_KEYS
-  KEY_Init();
+	BUZ_Init();
 #endif
 #if PL_HAS_RTOS
-  RTOS_Init();
+	 RTOS_Init();
 #endif
 #if PL_HAS_SHELL_QUEUE
-  SQUEUE_Init();
+	 SQUEUE_Init();
 #endif
-#if PL_HAS_SHELL
-  SHELL_Init();
+#if	PL_HAS_SHELL
+	 SHELL_Init();
 #endif
-#if PL_HAS_SEMAPHORE
-  SEM_Init();
+#if PL_HAS_LINE_SENSOR
+	 REF_Init();
 #endif
 }
 
 void PL_Deinit(void) {
-#if PL_HAS_TIMER
-  TMR_Deinit();
-#endif
-#if PL_HAS_EVENTS
-  EVNT_Deinit();
+
+#if PL_HAS_MEALY
+	MEALY_Deinit();
 #endif
 #if PL_HAS_LED
-  LED_Deinit();
+	LED_Deinit();
 #endif
-#if PL_HAS_TRIGGER
-  TRG_Deinit();
+
+#if PL_HAS_EVENTS
+	EVNT_Deinit();
 #endif
-#if PL_HAS_BUZZER
-  BUZ_Deinit();
-#endif
+
 #if PL_HAS_KEYS
-  KEY_Deinit();
+	KEY_Deinit();
 #endif
+
+#if PL_HAS_TRIGGER
+	TRG_Deinit();
+#endif
+
+#if PL_HAS_BUZZER
+	BUZ_Deinit();
+#endif
+
 #if PL_HAS_RTOS
-  RTOS_Deinit();
+	 RTOS_Deinit();
 #endif
-#if PL_HAS_SHELL
-  SHELL_Deinit();
+
+#if	PL_HAS_SHELL
+	 SHELL_Deinit();
 #endif
 #if PL_HAS_SHELL_QUEUE
-  SQUEUE_Deinit();
+	 SQUEUE_Deinit();
 #endif
-#if PL_HAS_SEMAPHORE
-  SEM_Deinit();
+#if PL_HAS_LINE_SENSOR
+	 REF_Deinit();
 #endif
-  }
+}

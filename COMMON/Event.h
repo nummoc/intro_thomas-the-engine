@@ -16,31 +16,37 @@
 #if PL_HAS_EVENTS
 
 typedef enum EVNT_Handle {
-  EVNT_STARTUP,			/*!< System startup Event */
-  EVNT_LED_HEARTBEAT,	/*!< LED heartbeat */
-  EVNT_SW1_PRESSED,		/*!< Button 1 pressed */
-  EVNT_SW1_LPRESSED,	/*!< Button 1 long pressed */
-  EVNT_SW1_RELEASED,	/*!< Button 1 released */
-  EVNT_SW2_PRESSED,		/*!< Button 2 pressed */
-  EVNT_SW2_LPRESSED,	/*!< Button 2 long pressed */
-  EVNT_SW2_RELEASED,	/*!< Button 2 released */
-  EVNT_SW3_PRESSED,		/*!< Button 3 pressed */
-  EVNT_SW3_LPRESSED,	/*!< Button 3 long pressed */
-  EVNT_SW3_RELEASED,	/*!< Button 3 released */
-  EVNT_SW4_PRESSED,		/*!< Button 4 pressed */
-  EVNT_SW4_LPRESSED,	/*!< Button 4 long pressed */
-  EVNT_SW4_RELEASED,	/*!< Button 4 released */
-  EVNT_SW5_PRESSED,		/*!< Button 5 pressed */
-  EVNT_SW5_LPRESSED,	/*!< Button 5 long pressed */
-  EVNT_SW5_RELEASED,	/*!< Button 5 released */
-  EVNT_SW6_PRESSED,		/*!< Button 6 pressed */
-  EVNT_SW6_LPRESSED,	/*!< Button 6 long pressed */
-  EVNT_SW6_RELEASED,	/*!< Button 6 released */
-  EVNT_SW7_PRESSED,		/*!< Button 7 pressed */
-  EVNT_SW7_LPRESSED,	/*!< Button 7 long pressed */
-  EVNT_SW7_RELEASED,	/*!< Button 7 released */
+  EVNT_INIT,            /*!< System Initialization Event */
+  EVNT_SW1_PRESSED,
+  EVNT_SW2_PRESSED,
+  EVNT_SW3_PRESSED,
+  EVNT_SW4_PRESSED,
+  EVNT_SW5_PRESSED,
+  EVNT_SW6_PRESSED,
+  EVNT_SW7_PRESSED,
+  EVNT_SW1_LPRESSED,
+  EVNT_SW2_LPRESSED,
+  EVNT_SW3_LPRESSED,
+  EVNT_SW4_LPRESSED,
+  EVNT_SW5_LPRESSED,
+  EVNT_SW6_LPRESSED,
+  EVNT_SW7_LPRESSED,
+  EVNT_SW1_RELEASED,
+  EVNT_SW2_RELEASED,
+  EVNT_SW3_RELEASED,
+  EVNT_SW4_RELEASED,
+  EVNT_SW5_RELEASED,
+  EVNT_SW6_RELEASED,
+  EVNT_SW7_RELEASED,
+  EVNT_LED_HEARTBEAT,
+  /*!< \todo Your events here */
   EVNT_NOF_EVENTS       /*!< Must be last one! */
 } EVNT_Handle;
+
+typedef struct __attribute__((__packed__)) EventAllocation {
+	EVNT_Handle handle;
+	void (*SpecificHandler)(void);
+} EventAllocation; /*!< Used to allocate event handles and handler functions*/
 
 /*!
  * \brief Sets an event.
@@ -72,7 +78,7 @@ bool EVNT_EventIsSetAutoClear(EVNT_Handle event);
  * \brief Routine to check if an event is pending. If an event is pending, the event is cleared and the provided callback is called.
  * \param[in] callback Callback routine to be called. The event handle is passed as argument to the callback.
  */
-void EVNT_HandleEvent(void (*callback)(EVNT_Handle));
+void EVNT_HandleEvent(EventAllocation* allocation,int allocatonSize);
 
 /*! \brief Event module initialization */
 void EVNT_Init(void);

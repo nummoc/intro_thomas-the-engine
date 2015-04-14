@@ -12,7 +12,7 @@
 /*!
  * \brief Kicks the debouncing state machine.
  */
-void KEYDBNC_Process(void);
+void KEYDBNC_Scan(void);
 
 /*!
  * \brief Driver initialization.

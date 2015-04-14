@@ -1,115 +1,53 @@
-/**
- * \file
- * \brief Platform Interface.
- * \author Erich Styger, erich.styger@hslu.ch
+/*
+ * Platform.h
  *
- * This implements the platform interface.
- * Here the platform gets initialized, and all platform dependent macros get defined.
+ *  Created on: 02.03.2015
+ *      Author: tastyger
  */
 
 #ifndef PLATFORM_H_
 #define PLATFORM_H_
-
 
 #include "PE_Types.h" /* for common Processor Expert types used throughout the project, e.g. 'bool' */
 #include "PE_Error.h" /* global error constants */
 
 /* List of supported platforms. The PL_BOARD_IS_xxx is defined in the compiler command line settings.  */
 #define PL_IS_FRDM   (defined(PL_BOARD_IS_FRDM))
-  /*!< Macro is defined through compiler option for the FRDM board */
-#define PL_IS_ROBO   (defined(PL_BOARD_IS_ROBO))
-  /*!< Macro is defined through compiler option for the Robot board */
+#define PL_IS_ROBO  (defined(PL_BOARD_IS_ROBO))
 
-#if 0 /* test only */
-#if PL_IS_FRDM
-  #include "MKL25Z4.h"
-#elif PL_IS_ROBO
-  #include "MK22F12.h"
-#else
-  #error "unknown CPU?"
-#endif
-#endif
 
-#define PL_HAS_LED      	(1)
-  /*!< Set to 1 to enable LED support, 0 otherwise */
-#define PL_HAS_EVENTS   	(1)
-  /*!< Set to 1 to enable events, 0 otherwise */
-#define PL_HAS_TIMER    	(1)
-  /*!< Set to 1 to enable timers, 0 otherwise */
+
+#define PL_HAS_LED      (1)
+
+#define PL_HAS_HAS_TIMER 	(1)
+#define PL_HAS_EVENTS		(1)
+#define PL_HAS_MEALY		(1)
 #define PL_HAS_KEYS			(1)
-  /*!< Set to 1 to enable keys, 0 otherwise */
 #define PL_HAS_KBI			(1)
-  /*!< Set to 1 to enable key interrupt support, 0 otherwise */
-#define PL_HAS_KBI_NMI		(0 && PL_IS_FRDM && PL_HAS_JOYSTICK)
-  /*!< Set to 1 for special case on NMI/PTA pin on FRDM board, 0 otherwise */
-#define PL_HAS_MEALY 		(1 && PL_NOF_LEDS>=1 && PL_NOF_KEYS>=1)
-  /*!< Set to 1 to enable Mealy sequential state machine, 0 otherwise */
-#define PL_HAS_RESET_KEY	(0 && PL_IS_FRDM && PL_HAS_KEYS)
-  /*!< Set to 1 to use reset switch on FRDM as button, 0 otherwise */
-#define PL_HAS_JOYSTICK		(1 && PL_IS_FRDM && PL_HAS_KEYS)
-  /*!< Set to 1 to enable joystick shield support, 0 otherwise */
 #define PL_HAS_TRIGGER		(1)
-  /*!< Set to 1 to enable trigger support, 0 otherwise */
-#define PL_HAS_BUZZER		(1)
-  /*!< Set to 1 to enable buzzer support, 0 otherwise */
-#define PL_HAS_SHELL		(1)
-  /*!< Set to 1 to enable shell support, 0 otherwise */
-#define PL_HAS_DEBOUNCE		(1)
-  /*!< Set to 1 to enable debouncing support, 0 otherwise */
+#define PL_HAS_DEBOUNCE 	(1)
 #define PL_HAS_RTOS			(1)
-  /*!< Set to 1 to enable RTOS support, 0 otherwise */
+#define PL_HAS_SHELL		(1)
 #define PL_HAS_SHELL_QUEUE	(1)
-  /*!< Set to 1 to enable Shell Queue support, 0 otherwise */
+
+#if PL_IS_FRDM
 #define PL_HAS_SEMAPHORE	(1)
-  /*!< Set to 1 to enable semaphore support, 0 otherwise */
-
-#if PL_IS_FRDM
-#define PL_HAS_BLUETOOTH	(0)
-  /*!< Set to 1 to enable bluetooth support, 0 otherwise */
-#define PL_HAS_USB_CDC		(0)
-  /*!< Set to 1 to enable USB CDC support, 0 otherwise */
-#elif PL_IS_ROBO
-#define PL_HAS_BLUETOOTH	(1)
-  /*!< Set to 1 to enable bluetooth support, 0 otherwise */
+#define PL_HAS_BLUETHOOTH	(0)
 #define PL_HAS_USB_CDC		(1)
-  /*!< Set to 1 to enable USB CDC support, 0 otherwise */
-#endif
+#define PL_NOF_LEDS       	(3)
+#define PL_HAS_JOYSTICK		(1)
+#define PL_NOF_KEYS			(7)
+#define PL_KEY_POLLED_KEY5 	(1)			//This key is beeing polled
+#define PL_KEY_POLLED_KEY6 	(1)			//This key is beeing polled
+#define PL_KEY_POLLED_KEY3 	(1)			//This key is beeing polled
 
-/* if keys are using interrupts or are polled */
-#if PL_IS_FRDM
-  #define PL_KEY_POLLED_KEY1    (0)
-  #define PL_KEY_POLLED_KEY2    (0)
-  #define PL_KEY_POLLED_KEY3    (1)
-  #define PL_KEY_POLLED_KEY4    (0)
-  #define PL_KEY_POLLED_KEY5    (1)
-  #define PL_KEY_POLLED_KEY6    (1)
-  #define PL_KEY_POLLED_KEY7    (0)
 #elif PL_IS_ROBO
-  #define PL_KEY_POLLED_KEY1    (0)
-#endif
-
-#if PL_IS_FRDM
-  #if PL_HAS_JOYSTICK
-    #define PL_NOF_LEDS       (2)
-      /*!< FRDM board has 2 LEDs (blue is used by joystick shield/nrf24L01+ SPI CLK) */
-    #define PL_NOF_KEYS       (7)
-       /*!< FRDM board has no keys without joystick shield */
-  #else
-    #define PL_NOF_LEDS       (3)
-       /*!< FRDM board has up to 3 LEDs (RGB) */
-#if PL_HAS_RESET_KEY
-    #define PL_NOF_KEYS       (1)
-       /*!< FRDM board with using the reset button */
-#else
-    #define PL_NOF_KEYS       (0)
-       /*!< FRDM board has no keys without joystick shield */
-#endif
-  #endif
-#elif PL_IS_ROBO
+#define PL_HAS_LINE_SENSOR	(1)
+#define PL_HAS_BLUETHOOTH	(1)
+#define PL_HAS_USB_CDC		(1)
   #define PL_NOF_LEDS       (2)
-     /*!< We have up to 2 LED's on the robo board */
-  #define PL_NOF_KEYS       (1)
-     /*!< We have up to 1 push button */
+#define PL_NOF_KEYS 		(1)
+#define PL_HAS_BUZZER		(1)
 #else
   #error "unknown configuration?"
 #endif

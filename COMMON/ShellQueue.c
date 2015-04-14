@@ -13,29 +13,22 @@
 
 static xQueueHandle SQUEUE_Queue;
 
-#define SQUEUE_LENGTH      32 /* items in queue, that's my buffer size */
+#define SQUEUE_LENGTH      64 /* items in queue, that's my buffer size */
 #define SQUEUE_ITEM_SIZE   1  /* each item is a single character */
 
 void SQUEUE_SendString(const unsigned char *str) {
-	while(*str!='\0') {
-		if (FRTOS1_xQueueSendToBack(SQUEUE_Queue, str, 100/portTICK_RATE_MS)!=pdPASS) {
-			for(;;){} /* ups? */ /* loosing character */
-		}
-		str++;
+	for(int i=0;str[i]!='\0';i++)
+	{
+		FRTOS1_xQueueSendToBack(SQUEUE_Queue,&str[i],100/portTICK_RATE_MS);
 	}
 }
 
 unsigned char SQUEUE_ReceiveChar(void) {
-  /*! \todo Implement function */
-	unsigned char ch;
-	portBASE_TYPE res;
-
-	res = FRTOS1_xQueueReceive(SQUEUE_Queue, &ch, 0);
-	if (res==errQUEUE_EMPTY) {
-		return '\0';
-	} else {
-		return ch;
-	}
+	char c;
+    if( FRTOS1_xQueueReceive(SQUEUE_Queue,&c,0/portTICK_RATE_MS)!=pdPASS){
+    	return '\0';
+    }
+    return c;
 }
 
 unsigned short SQUEUE_NofElements(void) {

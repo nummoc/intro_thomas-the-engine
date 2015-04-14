@@ -10,7 +10,7 @@
 #if PL_HAS_SHELL
 #include "Shell.h"
 #include "CLS1.h"
-#include "Application.h"
+#include "mainController.h"
 #include "FRTOS1.h"
 #if PL_HAS_USB_CDC
   #include "USB1.h"
@@ -20,6 +20,9 @@
 #endif
 #if PL_HAS_SHELL_QUEUE
   #include "ShellQueue.h"
+#endif
+#if PL_HAS_LINE_SENSOR
+#include "Reflectance.h"
 #endif
 
 /* forward declaration */
@@ -31,6 +34,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
   SHELL_ParseCommand, /* our own module parser */
 #if FRTOS1_PARSE_COMMAND_ENABLED
   FRTOS1_ParseCommand, /* FreeRTOS shell parser */
+#endif
+#if REF_PARSE_COMMAND_ENABLED
+  REF_ParseCommand,
 #endif
 #if PL_HAS_BLUETOOTH
 #if BT1_PARSE_COMMAND_ENABLED
@@ -174,6 +180,9 @@ static portTASK_FUNCTION(ShellTask, pvParameters) {
 
       while((ch=SQUEUE_ReceiveChar()) && ch!='\0') {
         ioLocal->stdOut(ch);
+#if PL_HAS_USB_CDC
+       CDC_stdio.stdOut(ch);
+#endif
 #if PL_HAS_BLUETOOTH
         BT_stdio.stdOut(ch); /* copy on Bluetooth */
 #endif

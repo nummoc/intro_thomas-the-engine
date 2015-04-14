@@ -1,42 +1,32 @@
-/**
- * \file
- * \brief Timer driver
- * \author Erich Styger, erich.styger@hslu.ch
+/*
+ * Timer.c
  *
- * This module implements the driver for all our timers.
-  */
-
-#include "Platform.h"
-#if PL_HAS_TIMER
+ *  Created on: 10.03.2015
+ *      Author: Cyrill
+ */
 #include "Timer.h"
-#if PL_HAS_LED
-  #include "LED.h"
-#endif
-#if PL_HAS_EVENTS
-  #include "Event.h"
-#endif
-#if PL_HAS_TRIGGER
+
+#if PL_HAS_HAS_TIMER
+#include "Event.h"
 #include "Trigger.h"
+
+#define TICKS_FOR_HEARTBEAT (1000/TMR_TICK_MS)
+
+
+void TMR_OnInterrupt(void){
+	TRG_IncTick();
+
+}
+
+
+void TMR_Init(void){
+
+}
+
+
+void TMR_Deinit(void){
+
+}
+
+
 #endif
-
-void TMR_OnInterrupt(void) {
-  /* this one gets called from an interrupt!!!! */
-
-
-
-#if PL_HAS_TRIGGER
-	  TRG_IncTick();
-#endif
-
-
-}
-
-void TMR_Init(void) {
-  /* nothing needed right now */
-}
-
-void TMR_Deinit(void) {
-  /* nothing needed right now */
-}
-
-#endif /*PL_HAS_TIMER*/

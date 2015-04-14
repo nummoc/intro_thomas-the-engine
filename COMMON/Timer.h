@@ -9,12 +9,9 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#if PL_HAS_RTOS
-#include "FreeRTOS.h"
-#define TMR_TICK_MS	portTICK_RATE_MS
-#else
-#define TMR_TICK_MS  (1)
-#endif
+#include "Platform.h"
+
+#define TMR_TICK_MS  1
   /*!< we get called every TMR_TICK_MS ms */
 
 /*! \brief Function called from timer interrupt every TMR_TICK_MS. */
@@ -25,5 +22,7 @@ void TMR_Init(void);
 
 /*! \brief Timer driver de-initialization */
 void TMR_Deinit(void);
+
+
 
 #endif /* TIMER_H_ */
