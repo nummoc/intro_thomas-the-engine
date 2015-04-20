@@ -24,6 +24,9 @@
 #if PL_HAS_LINE_SENSOR
 #include "Reflectance.h"
 #endif
+#if PL_HAS_MOTOR
+#include "Motor.h"
+#endif
 
 /* forward declaration */
 static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
@@ -42,6 +45,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #if BT1_PARSE_COMMAND_ENABLED
   BT1_ParseCommand,
 #endif
+#endif
+#if PL_HAS_MOTOR
+  MOT_ParseCommand,
 #endif
   NULL /* Sentinel */
 };

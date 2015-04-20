@@ -25,7 +25,7 @@
 #include "Shell.h"
 #include "CS1.h"
 
-//#include "NVM_Config.h"
+#include "NVM_Config.h"
 #if PL_HAS_BUZZER
 #include "Buzzer.h"
 #endif
@@ -439,17 +439,28 @@ int isStartStopCallibration(void) {
 }
 
 void clearStartStopCallibration(void) {
-	startStopCallibration =0;
+	startStopCallibration = 0;
 }
 
 static void REF_StateMachine(void) {
 	int i;
-
+	SensorCalibT* calValues;
 	switch (refState) {
 	case REF_STATE_INIT:
-		SHELL_SendString(
-				(unsigned char*) "INFO: No calibration data present.\r\n");
+#if PL_HAS_CONFIG_NVM
+		calValues = NVMC_GetReflectanceData();
+		if (calValues != NULL) {
+			SensorCalibMinMax = *calValues;
+			SHELL_SendString((unsigned char*) "INFO: Calibration data restored.\r\n");
+			refState = REF_STATE_READY;
+		} else {
+			SHELL_SendString((unsigned char*) "INFO: No calibration data present.\r\n");
+			refState = REF_STATE_NOT_CALIBRATED;
+		}
+#else
+		SHELL_SendString((unsigned char*) "INFO: No calibration data present.\r\n");
 		refState = REF_STATE_NOT_CALIBRATED;
+#endif
 		break;
 
 	case REF_STATE_NOT_CALIBRATED:
@@ -491,6 +502,9 @@ static void REF_StateMachine(void) {
 
 	case REF_STATE_READY:
 		REF_Measure();
+#if PL_HAS_CONFIG_NVM
+		NVMC_SaveReflectanceData(&SensorCalibMinMax, sizeof(SensorCalibMinMax));
+#endif
 		if (isStartStopCallibration()) {
 			clearStartStopCallibration();
 			refState = REF_STATE_START_CALIBRATION;

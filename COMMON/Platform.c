@@ -16,6 +16,8 @@
 #include "Shell.h"
 #include "ShellQueue.h"
 #include "Reflectance.h"
+#include "Motor.h"
+#include "NVM_Config.h"
 
 void PL_Init(void) {
 #if PL_HAS_MEALY
@@ -50,6 +52,12 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_LINE_SENSOR
 	 REF_Init();
+#endif
+#if PL_HAS_MOTOR
+	 MOT_Init();
+#endif
+#if PL_HAS_CONFIG_NVM
+	 NVMC_Init();
 #endif
 }
 
@@ -90,5 +98,11 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_LINE_SENSOR
 	 REF_Deinit();
+#endif
+#if PL_HAS_MOTOR
+	 MOT_Deinit();
+#endif
+#if PL_HAS_CONFIG_NVM
+	 NVMC_Deinit();
 #endif
 }

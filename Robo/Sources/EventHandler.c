@@ -40,7 +40,7 @@ void SendStringToUSB(char* string){
 }
 
 void ProcessInitEvet(void) {
-	SendStringToUSB("Hello from Fat Bastard\r\n" );
+	SendStringToUSB("Hello from Thomas the tank engine\r\n" );
 	BUZ_Beep(250,600);
 	for (int i = 0; i < 3; i++) {
 		LED2_On();
