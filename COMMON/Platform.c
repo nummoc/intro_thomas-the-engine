@@ -18,6 +18,8 @@
 #include "Reflectance.h"
 #include "Motor.h"
 #include "NVM_Config.h"
+#include "MCP4728.h"
+#include "Tacho.h"
 
 void PL_Init(void) {
 #if PL_HAS_MEALY
@@ -58,6 +60,12 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_CONFIG_NVM
 	 NVMC_Init();
+#endif
+#if PL_HAS_MCP4728
+	 MCP4728_Init();
+#endif
+#if PL_HAS_MOTOR_TACHO
+	 TACHO_Init();
 #endif
 }
 
@@ -104,5 +112,11 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_CONFIG_NVM
 	 NVMC_Deinit();
+#endif
+#if PL_HAS_MCP4728
+	 MCP4728_Deinit();
+#endif
+#if PL_HAS_MOTOR_TACHO
+	 TACHO_Deinit();
 #endif
 }

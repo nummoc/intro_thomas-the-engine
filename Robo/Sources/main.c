@@ -94,6 +94,8 @@
 #include "QuadInt.h"
 #include "TimerIntLdd2.h"
 #include "TU_QuadInt.h"
+#include "I2C1.h"
+#include "GI2C1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 /* Including shared modules, which are used for whole project */
@@ -102,7 +104,7 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
-#include "mainController.h"
+#include "Application.h"
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
 /*lint -restore Enable MISRA rule (6.3) checking. */
@@ -115,7 +117,7 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
-mainController_run();
+  APP_Run();
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START

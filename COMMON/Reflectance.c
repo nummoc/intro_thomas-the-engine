@@ -20,7 +20,6 @@
 #include "IR6.h"
 #include "UTIL1.h"
 #include "FRTOS1.h"
-#include "MainController.h"
 #include "Event.h"
 #include "Shell.h"
 #include "CS1.h"
@@ -497,6 +496,13 @@ static void REF_StateMachine(void) {
 
 	case REF_STATE_STOP_CALIBRATION:
 		SHELL_SendString((unsigned char*) "...stopping calibration.\r\n");
+#if PL_HAS_CONFIG_NVM
+		if (NVMC_SaveReflectanceData((void*) &SensorCalibMinMax, sizeof(SensorCalibMinMax)) == 0) {
+			SHELL_SendString((unsigned char*) "INFO: calibration stored.\r\n");
+		} else {
+			SHELL_SendString((unsigned char*) "INFO: could not store calibration.\r\n");
+		}
+#endif
 		refState = REF_STATE_READY;
 		break;
 

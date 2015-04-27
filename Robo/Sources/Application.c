@@ -5,7 +5,7 @@
  *      Author: Cyrill
  */
 
-#include "mainController.h"
+#include "Application.h"
 #include "WAIT1.h"
 #include "../../Common/Led.h"
 #include "../../Common/Event.h"
@@ -16,26 +16,28 @@
 #include "FRTOS1.h"
 #include "../../Common/RTOS.h"
 #include "../../Common/Keys.h"
+#include "../../Common/Motor.h"
+#include "../../Common/Reflectance.h"
+#include "Logic.h"
 
 
-static portTASK_FUNCTION(Main, pvParameters) {
+static void EvntHndlTask(void* param) {
 	KEY_EnableInterrupts();
 
 	EVNT_SetEvent(EVNT_INIT);
 	for (;;) {
 		EventHandler_HandleEvent();
-
 		FRTOS1_vTaskDelay(50 / portTICK_RATE_MS);
 	}
 }
 
-void mainController_run(void) {
+void APP_Run(void) {
 	PL_Init();
+	LOGIC_Init();
 
-	 if (FRTOS1_xTaskCreate(Main, (signed portCHAR *)"MAIN", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
-	    for(;;){} /* error */
-	  }
-	 RTOS_Run();
-
+	if (FRTOS1_xTaskCreate(EvntHndlTask, (signed portCHAR *)"EventHandlerTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
+		for(;;){} /* error */
+	}
+	RTOS_Run();
 }
 

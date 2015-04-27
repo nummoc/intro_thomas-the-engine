@@ -31,6 +31,9 @@
 #include "Events.h"
 #include "../../Common/Timer.h"
 #include "../../Common/Keys.h"
+#include "Q4CLeft.h"
+#include "Q4CRight.h"
+#include "../../Common/Tacho.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -117,7 +120,12 @@ void FRTOS1_vApplicationTickHook(void)
 {
   /* Called for every RTOS tick. */
   /* Write your code here ... */
-	TMR_OnInterrupt();
+#if PL_HAS_TRIGGER
+	TRG_IncTick();
+#endif
+#if PL_HAS_MOTOR_TACHO
+	TACHO_Sample();
+#endif
 }
 
 /*
@@ -180,6 +188,8 @@ void FRTOS1_vApplicationMallocFailedHook(void)
 void QuadInt_OnInterrupt(void)
 {
   /* Write your code here ... */
+	Q4CLeft_Sample();
+	Q4CRight_Sample();
 }
 
 /*
@@ -196,6 +206,40 @@ void QuadInt_OnInterrupt(void)
 */
 /* ===================================================================*/
 void IFsh1_OnWriteEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnRequestBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called before accessing the I2C bus.
+**         Useful for starting a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void GI2C1_OnRequestBus(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnReleaseBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called after accessing the I2C bus.
+**         Useful for ending a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void GI2C1_OnReleaseBus(void)
 {
   /* Write your code here ... */
 }

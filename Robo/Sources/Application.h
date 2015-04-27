@@ -9,7 +9,7 @@
 #define MAINCONTROLLER_H_
 
 
-void mainController_run(void);
+void APP_Run(void);
 
 
 #endif /* MAINCONTROLLER_H_ */

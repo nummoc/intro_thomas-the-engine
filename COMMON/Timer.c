@@ -14,8 +14,6 @@
 
 
 void TMR_OnInterrupt(void){
-	TRG_IncTick();
-
 }
 
 

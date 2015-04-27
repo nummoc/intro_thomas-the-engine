@@ -29,7 +29,7 @@
 #define PL_HAS_RTOS			(1)
 #define PL_HAS_SHELL		(1)
 #define PL_HAS_SHELL_QUEUE	(1)
-#define PL_HAS_CONFIG_NVM	(0)
+#define PL_HAS_CONFIG_NVM	(1)
 
 #if PL_IS_FRDM
 #define PL_HAS_SEMAPHORE	(1)
@@ -50,6 +50,10 @@
 #define PL_NOF_KEYS 		(1)
 #define PL_HAS_BUZZER		(1)
 #define PL_HAS_MOTOR		(1)
+#define PL_HAS_QUAD_CALIBRATION	(1)
+#define PL_HAS_MCP4728		(1)
+#define PL_HAS_MOTOR_QUAD	(1)
+#define PL_HAS_MOTOR_TACHO	(1)
 #else
   #error "unknown configuration?"
 #endif
