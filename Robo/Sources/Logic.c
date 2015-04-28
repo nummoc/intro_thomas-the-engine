@@ -43,9 +43,9 @@ static void MotorTask(void* param) {
 			stop();
 		} else {
 			result = REF_GetLineValue();
-			CLS1_SendNum16u(result, CLS1_GetStdio()->stdOut);
-			CLS1_SendStr((unsigned char*)"\r\n", CLS1_GetStdio()->stdOut);
-			if (result < 200) {
+			//CLS1_SendNum16u(result, CLS1_GetStdio()->stdOut);
+			//CLS1_SendStr((unsigned char*)"\r\n", CLS1_GetStdio()->stdOut);
+			if (result < 750) {
 				reverse();
 				FRTOS1_vTaskDelay(250 / portTICK_RATE_MS);
 				forward();
@@ -58,9 +58,9 @@ static void MotorTask(void* param) {
 }
 
 void LOGIC_Init() {
-	 if (FRTOS1_xTaskCreate(MotorTask, (signed portCHAR *)"MotorTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
-	   for(;;){} /* error */
-	 }
+//	 if (FRTOS1_xTaskCreate(MotorTask, (signed portCHAR *)"MotorTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
+//	   for(;;){} /* error */
+//	 }
 }
 
 void LOGIC_DEINIT() {}

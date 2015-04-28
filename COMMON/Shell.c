@@ -39,6 +39,12 @@
 #if PL_HAS_MOTOR_TACHO
 #include "Tacho.h"
 #endif
+#if PL_HAS_PID
+#include "Pid.h"
+#endif
+#if PL_HAS_DRIVE
+#include "Drive.h"
+#endif
 
 /* forward declaration */
 static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
@@ -73,6 +79,12 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #endif
 #if PL_HAS_MOTOR_TACHO
   TACHO_ParseCommand,
+#endif
+#if PL_HAS_PID
+  PID_ParseCommand,
+#endif
+#if PL_HAS_DRIVE
+  DRV_ParseCommand,
 #endif
   NULL /* Sentinel */
 };

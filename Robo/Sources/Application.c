@@ -35,7 +35,7 @@ void APP_Run(void) {
 	PL_Init();
 	LOGIC_Init();
 
-	if (FRTOS1_xTaskCreate(EvntHndlTask, (signed portCHAR *)"EventHandlerTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
+	if (FRTOS1_xTaskCreate(EvntHndlTask, (signed portCHAR *)"EventHandlerTask", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL) != pdPASS) {
 		for(;;){} /* error */
 	}
 	RTOS_Run();

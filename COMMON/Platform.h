@@ -54,6 +54,8 @@
 #define PL_HAS_MCP4728		(1)
 #define PL_HAS_MOTOR_QUAD	(1)
 #define PL_HAS_MOTOR_TACHO	(1)
+#define PL_HAS_PID			(1)
+#define PL_HAS_DRIVE		(1)
 #else
   #error "unknown configuration?"
 #endif

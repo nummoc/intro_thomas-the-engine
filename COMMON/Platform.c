@@ -20,6 +20,8 @@
 #include "NVM_Config.h"
 #include "MCP4728.h"
 #include "Tacho.h"
+#include "Pid.h"
+#include "Drive.h"
 
 void PL_Init(void) {
 #if PL_HAS_MEALY
@@ -66,6 +68,12 @@ void PL_Init(void) {
 #endif
 #if PL_HAS_MOTOR_TACHO
 	 TACHO_Init();
+#endif
+#if PL_HAS_PID
+	 PID_Init();
+#endif
+#if PL_HAS_DRIVE
+	 DRV_Init();
 #endif
 }
 
@@ -118,5 +126,11 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_MOTOR_TACHO
 	 TACHO_Deinit();
+#endif
+#if PL_HAS_PID
+	 PID_Deinit();
+#endif
+#if PL_HAS_DRIVE
+	 DRV_Deinit();
 #endif
 }
