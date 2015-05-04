@@ -31,6 +31,7 @@
 #define PL_HAS_SHELL_QUEUE	(1)
 #define PL_HAS_CONFIG_NVM	(1)
 
+
 #if PL_IS_FRDM
 #define PL_HAS_SEMAPHORE	(1)
 #define PL_HAS_BLUETHOOTH	(0)
@@ -56,6 +57,8 @@
 #define PL_HAS_MOTOR_TACHO	(1)
 #define PL_HAS_PID			(1)
 #define PL_HAS_DRIVE		(1)
+#define PL_HAS_ULTRASONIC	(1)
+
 #else
   #error "unknown configuration?"
 #endif

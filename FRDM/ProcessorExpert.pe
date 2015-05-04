@@ -2,9 +2,9 @@
 <PEproject>
   <Header>
     <Name>FRDM</Name>
-    <SavedBy>Philipp Gosswiler</SavedBy>
-    <ModificationStamp>38</ModificationStamp>
-    <Date>2015-04-20</Date>
+    <SavedBy>retoritter</SavedBy>
+    <ModificationStamp>41</ModificationStamp>
+    <Date>2015-05-04</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.1.RT6_b1444-1070</PEversion>
   </Header>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>99</ProjectCompNumb>
+    <ProjectCompNumb>102</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -51,6 +51,13 @@
     <UserFolderName />
     <NodeName>Joystick</NodeName>
     <CompNumb>39</CompNumb>
+    <FolderType>Beans</FolderType>
+    <ExpandedAll>true</ExpandedAll>
+  </UserFolder>
+  <UserFolder>
+    <UserFolderName />
+    <NodeName>Ultrasonic</NodeName>
+    <CompNumb>99</CompNumb>
     <FolderType>Beans</FolderType>
     <ExpandedAll>true</ExpandedAll>
   </UserFolder>

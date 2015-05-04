@@ -22,6 +22,8 @@
 #include "Tacho.h"
 #include "Pid.h"
 #include "Drive.h"
+#include "Ultrasonic.h"
+
 
 void PL_Init(void) {
 #if PL_HAS_MEALY
@@ -75,10 +77,15 @@ void PL_Init(void) {
 #if PL_HAS_DRIVE
 	 DRV_Init();
 #endif
+#if PL_HAS_ULTRASONIC
+	 US_Init();
+#endif
 }
 
 void PL_Deinit(void) {
-
+#if PL_HAS_ULTRASONIC
+	 US_Deinit();
+#endif
 #if PL_HAS_MEALY
 	MEALY_Deinit();
 #endif
@@ -133,4 +140,5 @@ void PL_Deinit(void) {
 #if PL_HAS_DRIVE
 	 DRV_Deinit();
 #endif
+
 }
