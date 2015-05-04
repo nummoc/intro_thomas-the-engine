@@ -98,6 +98,7 @@
 #include "GI2C1.h"
 #include "TU_US.h"
 #include "TRIG.h"
+#include "MMA1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 /* Including shared modules, which are used for whole project */
@@ -116,6 +117,7 @@ int main(void)
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
+
 
   /* Write your code here */
   /* For example: for(;;) { } */

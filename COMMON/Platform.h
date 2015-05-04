@@ -30,6 +30,9 @@
 #define PL_HAS_SHELL		(1)
 #define PL_HAS_SHELL_QUEUE	(1)
 #define PL_HAS_CONFIG_NVM	(1)
+#define PL_HAS_ACCEL		(1)
+
+
 
 
 #if PL_IS_FRDM
@@ -42,6 +45,7 @@
 #define PL_KEY_POLLED_KEY5 	(1)			//This key is beeing polled
 #define PL_KEY_POLLED_KEY6 	(1)			//This key is beeing polled
 #define PL_KEY_POLLED_KEY3 	(1)			//This key is beeing polled
+
 
 #elif PL_IS_ROBO
 #define PL_HAS_LINE_SENSOR	(1)

@@ -48,6 +48,9 @@
 #if PL_HAS_ULTRASONIC
 #include "Ultrasonic.h"
 #endif
+#if PL_HAS_ACCEL
+#include "MMA1.h"
+#endif
 
 /* forward declaration */
 static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
@@ -92,6 +95,11 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #if PL_HAS_ULTRASONIC
   US_ParseCommand,
 #endif
+#if PL_HAS_ACCEL
+  MMA1_ParseCommand,
+#endif
+
+
   NULL /* Sentinel */
 };
 

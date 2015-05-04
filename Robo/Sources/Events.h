@@ -102,6 +102,7 @@
 #include "GI2C1.h"
 #include "TU_US.h"
 #include "TRIG.h"
+#include "MMA1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 
