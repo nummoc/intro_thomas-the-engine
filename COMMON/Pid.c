@@ -219,7 +219,7 @@ void PID_Deinit(void) {
 
 void PID_Init(void) {
   /*! \todo determine your PID values */
-  speedLeftConfig.pFactor100 = 1700;
+  /*speedLeftConfig.pFactor100 = 1700;
   speedLeftConfig.iFactor100 = 10;
   speedLeftConfig.dFactor100 = 10;
   speedLeftConfig.iAntiWindup = 200000;
@@ -231,6 +231,19 @@ void PID_Init(void) {
   speedRightConfig.dFactor100 = 10;
   speedRightConfig.iAntiWindup = 200000;
   speedRightConfig.lastError = 0;
-  speedRightConfig.integral = 0;
-}
+  speedRightConfig.integral = 0;*/
+
+  speedLeftConfig.pFactor100 = 1100;
+  speedLeftConfig.iFactor100 = 50;
+  speedLeftConfig.dFactor100 = 20;
+  speedLeftConfig.iAntiWindup = 65535;
+  speedLeftConfig.lastError = 0;
+  speedLeftConfig.integral = 0;
+
+  speedRightConfig.pFactor100 = 1100;
+  speedRightConfig.iFactor100 = 50;
+  speedRightConfig.dFactor100 = 20;
+  speedRightConfig.iAntiWindup = 65535;
+  speedRightConfig.lastError = 0;
+  speedRightConfig.integral = 0;}
 #endif /* PL_HAS_PID */

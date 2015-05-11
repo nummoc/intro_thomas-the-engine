@@ -38,17 +38,16 @@ void SEM_Deinit(void) {
 
 /*! \brief Initializes module */
 void SEM_Init(void) {
-  if (FRTOS1_xTaskCreate(vMasterTask, "Master", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
-    for(;;){} /* error */
-  }
-  if (FRTOS1_xTaskCreate(vSlaveTask, "SLAVE", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
-    for(;;){} /* error */
-  }
+//  if (FRTOS1_xTaskCreate(vMasterTask, "Master", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
+//    for(;;){} /* error */
+//  }
+//  if (FRTOS1_xTaskCreate(vSlaveTask, "SLAVE", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL) != pdPASS) {
+//    for(;;){} /* error */
+//  }
 
-  vSemaphoreCreateBinary(MySem);
-  if (MySem == NULL) {
-   for(;;); /* creation failed */
-  }
-
+//  vSemaphoreCreateBinary(MySem);
+//  if (MySem == NULL) {
+//   for(;;); /* creation failed */
+//  }
 }
 #endif /* PL_HAS_SEMAPHORE */

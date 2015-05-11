@@ -35,8 +35,6 @@
 #include "WAIT1.h"
 #include "Led2.h"
 #include "BitIoLdd2.h"
-#include "Led3.h"
-#include "BitIoLdd3.h"
 #include "CS1.h"
 #include "HF1.h"
 #include "SW1.h"
@@ -70,12 +68,20 @@
 #include "I2C1.h"
 #include "GI2C1.h"
 #include "MMA1.h"
+#include "RNET1.h"
+#include "RF1.h"
+#include "CE1.h"
+#include "BitIoLdd11.h"
+#include "CSN1.h"
+#include "BitIoLdd12.h"
+#include "SM1.h"
+#include "SMasterLdd1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
-#include "mainController.h"
+#include "Application.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -91,7 +97,7 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
 
-  mainController_run();
+  APP_Run();
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/

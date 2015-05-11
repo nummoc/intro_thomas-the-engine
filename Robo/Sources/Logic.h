@@ -10,7 +10,7 @@
 #ifndef LOGIC_H_
 #define LOGIC_H_
 
-void LOGIC_ToggleDrive();
+void LOGIC_Toggle();
 
 void LOGIC_Init();
 void LOGIC_Deinit();

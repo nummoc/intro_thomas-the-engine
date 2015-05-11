@@ -1,10 +1,3 @@
-/*
- * mainController.h
- *
- *  Created on: 24.02.2015
- *      Author: Cyrill
- */
-
 #ifndef MAINCONTROLLER_H_
 #define MAINCONTROLLER_H_
 

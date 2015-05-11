@@ -51,6 +51,13 @@
 #if PL_HAS_ACCEL
 #include "MMA1.h"
 #endif
+#if PL_HAS_RADIO
+#include "RNet_App.h"
+#include "Radio.h"
+#endif
+#if PL_HAS_REMOTE
+#include "Remote.h"
+#endif
 
 /* forward declaration */
 static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
@@ -98,8 +105,13 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #if PL_HAS_ACCEL
   MMA1_ParseCommand,
 #endif
-
-
+#if PL_HAS_RADIO
+  RNETA_ParseCommand,
+  RADIO_ParseCommand,
+#endif
+#if PL_HAS_REMOTE
+  REMOTE_ParseCommand,
+#endif
   NULL /* Sentinel */
 };
 

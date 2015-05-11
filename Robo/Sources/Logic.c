@@ -3,64 +3,85 @@
  * \brief	
  * \author	Philipp Gosswiler <philipp.gosswiler@stud.hslu.ch>
  * \author	Reto Ritter <reto.ritter@stud.hslu.ch>
- *
- *
  */
+#include "Logic.h"
 #include "FRTOS1.h"
 #include "CLS1.h"
 #include "../../Common/Motor.h"
 #include "../../Common/Reflectance.h"
+#include "../../Common/Drive.h"
+#include "../../Common/Trigger.h"
 
-int toggleDrive = 0;
+static int toggleDrive = 0;
 
-void LOGIC_ToggleDrive() {
-	if (toggleDrive) {
-		toggleDrive = 0;
-	} else {
-		toggleDrive = 1;
+typedef enum {
+  LOGIC_Idle,
+  LOGIC_Start,
+  LOGIC_Search,
+  LOGIC_Attack,
+  LOGIC_Backup
+} LOGIC_State;
+static volatile LOGIC_State logicState = LOGIC_Idle; /* state machine state */
+static volatile bool run = FALSE;
+
+void CheckForEdge() {
+	uint16_t lineValue = REF_GetLineValue();
+	if (lineValue > 500) {
+		logicState = LOGIC_Backup;
 	}
 }
 
-void forward() {
-	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), (MOT_SpeedPercent) 10);
-	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), (MOT_SpeedPercent) 10);
+void Wait(int millis) {
+	FRTOS1_vTaskDelay(millis / portTICK_RATE_MS);
 }
 
-void stop() {
-	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), (MOT_SpeedPercent) 0);
-	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), (MOT_SpeedPercent) 0);
-}
-
-void reverse() {
-	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), (MOT_SpeedPercent) -10);
-	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), (MOT_SpeedPercent) -10);
-}
-
-static void MotorTask(void* param) {
+static void LogicTask(void* param) {
 	uint16_t result;
 	for(;;) {
-		if (toggleDrive) {
-			stop();
-		} else {
-			result = REF_GetLineValue();
-			//CLS1_SendNum16u(result, CLS1_GetStdio()->stdOut);
-			//CLS1_SendStr((unsigned char*)"\r\n", CLS1_GetStdio()->stdOut);
-			if (result < 750) {
-				reverse();
-				FRTOS1_vTaskDelay(250 / portTICK_RATE_MS);
-				forward();
-			} else {
-				forward();
-			}
+		if (!run) {
+			DRV_SetSpeed(0, 0);
+			continue;
 		}
-		FRTOS1_vTaskDelay(100 / portTICK_RATE_MS);
+		CheckForEdge();
+		switch (logicState) {
+			case LOGIC_Start:
+
+				break;
+			case LOGIC_Backup:
+				DRV_SetSpeed(-1000, -1000);
+				Wait(100);
+				DRV_SetSpeed(1000, -1000);
+				Wait(100);
+				DRV_SetSpeed(0, 0);
+				logicState = LOGIC_Search;
+				continue;
+			case LOGIC_Idle:
+				break;
+			case LOGIC_Search:
+				DRV_SetSpeed(1000, 1000);
+				break;
+			case LOGIC_Attack:
+				break;
+			default:
+				break;
+		}
+		Wait(50);
+	}
+}
+
+void LOGIC_Toggle() {
+	if (run) {
+		run = FALSE;
+	} else {
+		run = TRUE;
+		logicState = LOGIC_Search;
 	}
 }
 
 void LOGIC_Init() {
-//	 if (FRTOS1_xTaskCreate(MotorTask, (signed portCHAR *)"MotorTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
-//	   for(;;){} /* error */
-//	 }
+	 if (FRTOS1_xTaskCreate(LogicTask, (signed portCHAR *)"LogicTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
+	   for(;;){} /* error */
+	 }
 }
 
 void LOGIC_DEINIT() {}

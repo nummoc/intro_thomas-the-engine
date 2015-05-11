@@ -5,7 +5,7 @@
  *      Author: Cyrill
  */
 
-#include "mainController.h"
+#include "Application.h"
 #include "WAIT1.h"
 #include "../../Common/Led.h"
 #include "../../Common/Event.h"
@@ -21,28 +21,22 @@
 #include "../../Common/Sem.h"
 
 
-
-static portTASK_FUNCTION(Main, pvParameters) {
+static void MainTask(void* pvParameters) {
+	(void*) pvParameters;
 	KEY_EnableInterrupts();
-
 	EVNT_SetEvent(EVNT_INIT);
 	for (;;) {
 		KEY_Scan();
 		EventHandler_HandleEvent();
-
 		FRTOS1_vTaskDelay(50 / portTICK_RATE_MS);
 	}
 }
 
-void mainController_run(void) {
-
+void APP_Run(void) {
 	PL_Init();
-
-	 if (FRTOS1_xTaskCreate(Main, (signed portCHAR *)"MAIN", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
+	 if (FRTOS1_xTaskCreate(MainTask, (signed portCHAR *)"MainTask", configMINIMAL_STACK_SIZE, NULL, 1, NULL) != pdPASS) {
 	    for(;;){} /* error */
 	  }
-	 SEM_Init();
 	 RTOS_Run();
-
 }
 
